@@ -1,46 +1,33 @@
+use std::collections::{HashMap, HashSet};
+
 const INPUT: &str = include_str!("../input.txt");
 
 fn main() {
     let (rules, pages) = INPUT.split_once("\n\n").unwrap();
+    let mut orderings = HashMap::<usize, HashSet<usize>>::new();
 
-    let rules: Vec<(usize, usize)> = rules
-        .lines()
-        .map(|rule| {
-            let (a, b) = rule.split_once("|").unwrap();
-            (a.parse().unwrap(), b.parse().unwrap())
-        })
-        .collect();
+    for l in rules.lines() {
+        let (x, y) = l.split_once('|').unwrap();
+        orderings
+            .entry(y.parse().unwrap())
+            .or_default()
+            .insert(x.parse().unwrap());
+    }
+    let pages = pages.lines().map(|l| {
+        l.split(',')
+            .map(|w| w.parse::<usize>().unwrap())
+            .collect::<Vec<_>>()
+    });
 
-    let pages: Vec<Vec<usize>> = pages
-        .lines()
-        .map(|page| page.split(",").map(|s| s.parse().unwrap()).collect())
-        .collect();
-
-    let mut failed_pages = vec![false; pages.len()];
-
-    for (previous, rule) in rules.iter() {
-        for p in 0..pages.len() {
-            if failed_pages[p] {
-                continue;
-            } else if let Some(rule_index) = pages[p].iter().position(|x| x == rule) {
-                if pages[p][rule_index..].contains(previous) {
-                    failed_pages[p] = true
-                }
-            }
+    let (mut p1, mut p2) = (0, 0);
+    for mut p in pages {
+        if p.is_sorted_by(|a, b| orderings[b].contains(a)) {
+            p1 += p[p.len() / 2];
+        } else {
+            p.sort_by(|a, b| orderings[b].contains(a).cmp(&true));
+            p2 += p[p.len() / 2];
         }
     }
-
-    let sum: usize = pages
-        .iter()
-        .enumerate()
-        .filter_map(|(index, pages_vec)| {
-            if !failed_pages[index] {
-                Some(pages_vec[pages_vec.len() / 2])
-            } else {
-                None
-            }
-        })
-        .sum();
-
-    println!("Sum of correct pages: {sum}");
+    println!("Sum of middle page numbers of correct pages: {}", p1);
+    println!("Sum of corrected pages: {}", p2);
 }

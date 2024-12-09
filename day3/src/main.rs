@@ -4,10 +4,11 @@ const INPUT: &str = include_str!("../input.txt");
 const REGEX: &str = r#"(mul\((\d+),(\d+)\))"#;
 
 fn main() {
-    let mut sum: u32 = mul_sum(INPUT);
+    let do_input = "do()".to_owned() + INPUT;
+    let mut sum: u32 = mul_sum(&do_input);
     println!("The sum of the multiplication is: {}", sum);
 
-    sum = do_mul(INPUT);
+    sum = do_mul(&do_input);
     println!("The sum of the do() multiplication is: {}", sum);
 }
 
