@@ -1,9 +1,9 @@
 use regex::Regex;
 use std::ops::Mul;
-const INPUT: &str = include_str!("../input.txt");
+const INPUT: &str = include_str!("./input/day3.txt");
 const REGEX: &str = r#"(mul\((\d+),(\d+)\))"#;
 
-fn main() {
+pub fn print_solution() {
     let do_input = "do()".to_owned() + INPUT;
     let mut sum: u32 = mul_sum(&do_input);
     println!("The sum of the multiplication is: {}", sum);

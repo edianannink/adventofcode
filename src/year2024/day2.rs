@@ -1,6 +1,6 @@
-const INPUT: &str = include_str!("../input.txt");
+const INPUT: &str = include_str!("./input/day2.txt");
 
-fn main() {
+pub fn print_solution() {
     let mut sum = count_safe_reports(monotonic_series);
     println!("The number of safe reports is: {sum}");
 
@@ -17,8 +17,7 @@ fn count_safe_reports(condition: fn(&[usize]) -> bool) -> usize {
                 .collect::<Vec<usize>>()
         })
         .filter(|vec| {
-            condition(vec)
-                ^ condition(&vec.iter().rev().copied().collect::<Vec<usize>>())
+            condition(vec) ^ condition(&vec.iter().rev().copied().collect::<Vec<usize>>())
         })
         .count()
 }

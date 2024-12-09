@@ -1,9 +1,9 @@
 use std::collections::HashMap;
 
-const INPUT: &str = include_str!("../input.txt");
+const INPUT: &str = include_str!("./input/day4.txt");
 const SEARCH_PATTERN: &str = "XMAS";
 
-fn main() {
+pub fn print_solution() {
     let mut matrix = Vec::new();
 
     // Matrix of characters

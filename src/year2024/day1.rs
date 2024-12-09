@@ -1,6 +1,6 @@
-const INPUT: &str = include_str!("../input.txt");
+const INPUT: &str = include_str!("./input/day1.txt");
 
-fn main() {
+pub fn print_solution() {
     let mut values = [Vec::new(), Vec::new()];
     for line in INPUT.lines() {
         let mut split = line.split_whitespace();

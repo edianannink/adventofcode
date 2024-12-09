@@ -1,8 +1,8 @@
 use std::collections::{HashMap, HashSet};
 
-const INPUT: &str = include_str!("../input.txt");
+const INPUT: &str = include_str!("./input/day5.txt");
 
-fn main() {
+pub fn print_solution() {
     let (rules, pages) = INPUT.split_once("\n\n").unwrap();
     let mut orderings = HashMap::<usize, HashSet<usize>>::new();
 
