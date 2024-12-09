@@ -1,9 +1,15 @@
+use crate::year2024::examples;
 use std::collections::{HashMap, HashSet};
 
-const INPUT: &str = include_str!("./input/day5.txt");
+pub fn solution() -> (usize, usize) {
+    let input = std::fs::read_to_string("./src/year2024/input/day5.txt")
+        .unwrap_or_else(|_| examples::DAY5.to_string());
 
-pub fn print_solution() {
-    let (rules, pages) = INPUT.split_once("\n\n").unwrap();
+    compute_pages(input)
+}
+
+fn compute_pages(input: String) -> (usize, usize) {
+    let (rules, pages) = input.split_once("\n\n").unwrap();
     let mut orderings = HashMap::<usize, HashSet<usize>>::new();
 
     for l in rules.lines() {
@@ -21,13 +27,27 @@ pub fn print_solution() {
 
     let (mut p1, mut p2) = (0, 0);
     for mut p in pages {
-        if p.is_sorted_by(|a, b| orderings[b].contains(a)) {
+        if p.is_sorted_by(|a, b| orderings.get(b).map_or(false, |set| set.contains(a))) {
             p1 += p[p.len() / 2];
         } else {
-            p.sort_by(|a, b| orderings[b].contains(a).cmp(&true));
+            p.sort_by(|a, b| {
+                orderings
+                    .get(a)
+                    .map_or(false.cmp(&true), |set| set.contains(b).cmp(&true))
+            });
             p2 += p[p.len() / 2];
         }
     }
-    println!("Sum of middle page numbers of correct pages: {}", p1);
-    println!("Sum of corrected pages: {}", p2);
+    (p1, p2)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_day5() {
+        let (part1, part2) = (143, 123);
+        assert_eq!(compute_pages(examples::DAY5.to_string()), (part1, part2));
+    }
 }

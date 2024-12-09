@@ -1,15 +1,17 @@
-const INPUT: &str = include_str!("./input/day2.txt");
+use crate::year2024::examples;
 
-pub fn print_solution() {
-    let mut sum = count_safe_reports(monotonic_series);
-    println!("The number of safe reports is: {sum}");
+pub fn solution() -> (usize, usize) {
+    let input = std::fs::read_to_string("./src/year2024/input/day2.txt")
+        .unwrap_or_else(|_| examples::DAY2.to_string());
 
-    sum = count_safe_reports(monotonic_series_dampener);
-    println!("The number of safe reports with dampener is: {sum}");
+    (
+        count_safe_reports(&input, monotonic_series),
+        count_safe_reports(&input, monotonic_series_dampener),
+    )
 }
 
-fn count_safe_reports(condition: fn(&[usize]) -> bool) -> usize {
-    INPUT
+fn count_safe_reports(input: &str, condition: fn(&[usize]) -> bool) -> usize {
+    input
         .lines()
         .map(|line| {
             line.split_whitespace()
@@ -43,5 +45,20 @@ fn monotonic_series_dampener(series: &[usize]) -> bool {
             }
         }
         false
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_day2() {
+        let (part1, part2) = (2, 4);
+        assert_eq!(count_safe_reports(examples::DAY2, monotonic_series), part1);
+        assert_eq!(
+            count_safe_reports(examples::DAY2, monotonic_series_dampener),
+            part2
+        );
     }
 }

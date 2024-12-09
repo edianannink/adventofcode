@@ -1,18 +1,17 @@
+use crate::year2024::examples;
 use regex::Regex;
 use std::ops::Mul;
-const INPUT: &str = include_str!("./input/day3.txt");
+
 const REGEX: &str = r#"(mul\((\d+),(\d+)\))"#;
 
-pub fn print_solution() {
-    let do_input = "do()".to_owned() + INPUT;
-    let mut sum: u32 = mul_sum(&do_input);
-    println!("The sum of the multiplication is: {}", sum);
+pub fn solution() -> (usize, usize) {
+    let input = std::fs::read_to_string("./src/year2024/input/day3.txt")
+        .unwrap_or_else(|_| examples::DAY3.to_string());
 
-    sum = do_mul(&do_input);
-    println!("The sum of the do() multiplication is: {}", sum);
+    (mul_sum(&input), do_mul(&input))
 }
 
-fn mul_sum(input_str: &str) -> u32 {
+fn mul_sum(input_str: &str) -> usize {
     Regex::new(REGEX)
         .unwrap()
         .captures_iter(input_str)
@@ -20,14 +19,14 @@ fn mul_sum(input_str: &str) -> u32 {
             mat.get(2)
                 .unwrap()
                 .as_str()
-                .parse::<u32>()
+                .parse::<usize>()
                 .unwrap()
-                .mul(mat.get(3).unwrap().as_str().parse::<u32>().unwrap())
+                .mul(mat.get(3).unwrap().as_str().parse::<usize>().unwrap())
         })
         .sum()
 }
 
-fn do_mul(input_str: &str) -> u32 {
+fn do_mul(input_str: &str) -> usize {
     let mut sum = 0;
     let mut start_pos = 0;
 
@@ -41,4 +40,16 @@ fn do_mul(input_str: &str) -> u32 {
         start_pos = end_index;
     }
     sum
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_day3() {
+        let (part1, part2) = (161, 48);
+        assert_eq!(mul_sum(examples::DAY3), part1);
+        assert_eq!(do_mul(examples::DAY3), part2);
+    }
 }

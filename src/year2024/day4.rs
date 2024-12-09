@@ -1,30 +1,38 @@
+use crate::year2024::examples;
 use std::collections::HashMap;
 
-const INPUT: &str = include_str!("./input/day4.txt");
 const SEARCH_PATTERN: &str = "XMAS";
 
-pub fn print_solution() {
+pub fn solution() -> (usize, usize) {
+    let input = std::fs::read_to_string("./src/year2024/input/day4.txt")
+        .unwrap_or_else(|_| examples::DAY4.to_string());
+
+    let mut matrix = construct_matrix(input);
+
+    (total_matches(&mut matrix), cross_mas_matches(&matrix))
+}
+
+fn construct_matrix(input: String) -> Vec<Vec<char>> {
     let mut matrix = Vec::new();
 
     // Matrix of characters
-    INPUT.lines().for_each(|line| {
+    input.lines().for_each(|line| {
         let row: Vec<char> = line.chars().collect();
         matrix.push(row);
     });
+    matrix
+}
 
-    let matches = diagonal_matches(&matrix)
+fn total_matches(matrix: &mut [Vec<char>]) -> usize {
+    diagonal_matches(matrix)
         + diagonal_matches(
             &matrix
                 .iter()
                 .map(|row| row.iter().rev().cloned().collect())
                 .collect::<Vec<Vec<char>>>(),
         )
-        + row_matches(&matrix)
-        + col_matches(&matrix);
-
-    println!("Pattern {SEARCH_PATTERN} found {matches} times in the matrix");
-
-    println!("Cross MAS matches: {}", cross_mas_matches(&matrix));
+        + row_matches(matrix)
+        + col_matches(matrix)
 }
 
 fn transpose_matrix(matrix: &[Vec<char>]) -> Vec<Vec<char>> {
@@ -118,4 +126,18 @@ fn cross_mas_matches(matrix: &[Vec<char>]) -> usize {
     }
 
     matches
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_day4() {
+        let (part1, part2) = (18, 9);
+        let mut matrix = construct_matrix(examples::DAY4.to_string());
+        assert_eq!(total_matches(&mut matrix), part1);
+        matrix = construct_matrix(examples::DAY4.to_string());
+        assert_eq!(cross_mas_matches(&matrix), part2);
+    }
 }
