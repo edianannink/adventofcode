@@ -12,7 +12,7 @@ pub fn solution() -> (usize, usize) {
     (total_matches(&mut matrix), cross_mas_matches(&matrix))
 }
 
-fn construct_matrix(input: String) -> Vec<Vec<char>> {
+pub(crate) fn construct_matrix(input: String) -> Vec<Vec<char>> {
     let mut matrix = Vec::new();
 
     // Matrix of characters
