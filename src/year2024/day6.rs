@@ -36,7 +36,7 @@ impl Position {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Eq, Hash, PartialEq)]
 enum Directions {
     Up,
     Down,
@@ -88,18 +88,17 @@ fn get_char(matrix: &[Vec<char>], position: &Position) -> Option<char> {
 
 //TODO: Introduce Guard object that contains position and directions
 fn traverse(matrix: &[Vec<char>], position: Position, directions: Directions) -> Option<usize> {
-    let mut distinct_positions = HashSet::new();
+    let mut visited_pos_dir = HashSet::new();
+    let mut visited = HashSet::new();
     let mut dir = directions.clone();
     let mut pos = position.clone();
-    let mut iterations = 0;
 
     while pos.x > 0 && pos.x < matrix[0].len() - 1 && pos.y > 0 && pos.y < matrix.len() - 1 {
-        iterations += 1;
-        if iterations > matrix.len() * matrix[0].len() {
-            return None;
+        if !visited_pos_dir.insert((pos.clone(), dir.clone())) {
+            return None; // Loop detected
         }
 
-        distinct_positions.insert(pos.clone());
+        visited.insert(pos.clone());
 
         if let Some(OBSTACLE) = get_char(matrix, &pos.clone().next_position(dir.clone())) {
             if let Some(OBSTACLE) = get_char(matrix, &pos.clone().next_position(dir.rotate_right()))
@@ -112,9 +111,9 @@ fn traverse(matrix: &[Vec<char>], position: Position, directions: Directions) ->
         pos = pos.next_position(dir.clone());
     }
 
-    distinct_positions.insert(pos.clone());
+    visited.insert(pos.clone());
 
-    Some(distinct_positions.len())
+    Some(visited.len())
 }
 
 fn part1(matrix: &[Vec<char>]) -> usize {
