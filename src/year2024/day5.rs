@@ -27,7 +27,7 @@ fn compute_pages(input: String) -> (usize, usize) {
 
     let (mut p1, mut p2) = (0, 0);
     for mut p in pages {
-        if p.is_sorted_by(|a, b| orderings.get(b).map_or(false, |set| set.contains(a))) {
+        if p.is_sorted_by(|a, b| orderings.get(b).is_some_and(|set| set.contains(a))) {
             p1 += p[p.len() / 2];
         } else {
             p.sort_by(|a, b| {
