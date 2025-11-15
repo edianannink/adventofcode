@@ -5,10 +5,7 @@ pub fn solution() -> (usize, usize) {
         .unwrap_or_else(|_| examples::DAY9.to_string());
     let trimmed_input = input.trim();
 
-    (
-        disk_map_part1(trimmed_input) as usize,
-        disk_map_part2(trimmed_input),
-    )
+    (disk_map_part1(trimmed_input), disk_map_part2(trimmed_input))
 }
 
 fn disk_map_part2(input: &str) -> usize {
