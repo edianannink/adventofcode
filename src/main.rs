@@ -1,4 +1,4 @@
-use adventofcode::year2024::{day1, day10, day2, day3, day4, day5, day6, day7, day8, day9};
+use adventofcode::year2024::{day1, day10, day11, day2, day3, day4, day5, day6, day7, day8, day9};
 
 fn print_header() {
     println!("===============================");
@@ -29,5 +29,6 @@ fn main() {
     print_day_solution(8, day8::solution());
     print_day_solution(9, day9::solution());
     print_day_solution(10, day10::solution());
+    print_day_solution(11, day11::solution());
     print_footer();
 }

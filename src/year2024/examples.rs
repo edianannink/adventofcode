@@ -100,3 +100,5 @@ pub(crate) const DAY10: &str = r#"89010123
 32019012
 01329801
 10456732"#;
+
+pub(crate) const DAY11: &str = "125 17";

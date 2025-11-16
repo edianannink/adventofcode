@@ -17,24 +17,25 @@ pub fn solution() -> (usize, usize) {
         })
         .collect();
 
-    (trails(matrix), 0)
+    trails(matrix)
 }
 
-fn trails(input: Vec<Vec<usize>>) -> usize {
+fn trails(input: Vec<Vec<usize>>) -> (usize, usize) {
     let (rows, cols) = (input.len(), input[0].len());
 
-    let mut sum = 0usize;
+    let (mut sum_part1, mut sum_part2) = (0, 0);
     for row in 0..rows {
         for col in 0..cols {
             if input[row][col] == 9 {
-                sum += explore((row, col), &input).len();
+                sum_part1 += explore_part1((row, col), &input).len();
+                sum_part2 += explore_part2((row, col), &input).len();
             }
         }
     }
-    sum
+    (sum_part1, sum_part2)
 }
 
-fn explore(start: (usize, usize), input: &[Vec<usize>]) -> HashSet<(usize, usize)> {
+fn explore_part1(start: (usize, usize), input: &[Vec<usize>]) -> HashSet<(usize, usize)> {
     let (rows, cols) = (input.len(), input[0].len());
 
     let mut stack: Vec<(usize, usize)> = vec![start];
@@ -54,6 +55,34 @@ fn explore(start: (usize, usize), input: &[Vec<usize>]) -> HashSet<(usize, usize
             if nr >= 0 && nr < rows as isize && nc >= 0 && nc < cols as isize {
                 let (nr, nc) = (nr as usize, nc as usize);
                 if input[nr][nc] + 1 == height && visited.insert((nr, nc)) {
+                    stack.push((nr, nc));
+                }
+            }
+        }
+    }
+
+    result
+}
+
+fn explore_part2(start: (usize, usize), input: &[Vec<usize>]) -> Vec<(usize, usize)> {
+    let (rows, cols) = (input.len(), input[0].len());
+
+    let mut stack: Vec<(usize, usize)> = vec![start];
+    let mut result = Vec::new();
+
+    while let Some((r, c)) = stack.pop() {
+        let height = input[r][c];
+        if height == 0 {
+            result.push((r, c));
+            continue;
+        }
+
+        for (dr, dc) in DIRECTIONS {
+            let nr = r as isize + dr;
+            let nc = c as isize + dc;
+            if nr >= 0 && nr < rows as isize && nc >= 0 && nc < cols as isize {
+                let (nr, nc) = (nr as usize, nc as usize);
+                if input[nr][nc] + 1 == height {
                     stack.push((nr, nc));
                 }
             }
