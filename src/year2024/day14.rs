@@ -4,7 +4,7 @@ const ROWS: usize = 103;
 const COLS: usize = 101;
 const SECONDS: usize = 100;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 struct Robot {
     pos: (isize, isize),
     vel: (isize, isize),
@@ -29,10 +29,10 @@ pub fn solution() -> (usize, usize) {
 
     let robots = parse_input(&input);
 
-    (part1(robots), 0)
+    (part1(&robots), part2(&robots))
 }
 
-fn part1(robots: Vec<Robot>) -> usize {
+fn part1(robots: &Vec<Robot>) -> usize {
     let mut quadrants = [0usize; 4];
     for robot in robots {
         let (r, c) = robot.final_pos(ROWS as isize, COLS as isize, SECONDS as isize);
@@ -46,6 +46,21 @@ fn part1(robots: Vec<Robot>) -> usize {
         }
     }
     quadrants.iter().product()
+}
+
+fn part2(robots: &Vec<Robot>) -> usize {
+    for seconds in 0..(1 << 14) {
+        let mut floor = vec![0u8; ROWS * COLS];
+        for robot in robots {
+            let (r, c) = robot.final_pos(ROWS as isize, COLS as isize, seconds as isize);
+            floor[r * COLS + c] += 1;
+        }
+
+        if floor.windows(10).any(|w| w.iter().all(|x| *x > 0)) {
+            return seconds;
+        };
+    }
+    0
 }
 
 fn parse_input(input: &str) -> Vec<Robot> {
