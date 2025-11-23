@@ -29,7 +29,12 @@ pub fn solution() -> (usize, usize) {
 
     let robots = parse_input(&input);
 
-    (part1(&robots), part2(&robots))
+    let part2 = if input.lines().count() < 20 {
+        0
+    } else {
+        part2(&robots)
+    };
+    (part1(&robots), part2)
 }
 
 fn part1(robots: &Vec<Robot>) -> usize {
