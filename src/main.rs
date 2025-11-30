@@ -1,5 +1,6 @@
 use adventofcode::year2024::{
-    day1, day10, day11, day12, day13, day14, day15, day2, day3, day4, day5, day6, day7, day8, day9,
+    day1, day10, day11, day12, day13, day14, day15, day16, day2, day3, day4, day5, day6, day7,
+    day8, day9,
 };
 
 fn print_header() {
@@ -36,5 +37,6 @@ fn main() {
     print_day_solution(13, day13::solution());
     print_day_solution(14, day14::solution());
     print_day_solution(15, day15::solution());
+    print_day_solution(16, day16::solution());
     print_footer();
 }
