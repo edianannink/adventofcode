@@ -35,8 +35,7 @@ fn dijkstra(maze: &[Vec<char>], start: (usize, usize), end: (usize, usize)) -> (
     let (rows, cols) = (maze.len(), maze[0].len());
     let mut heap = BinaryHeap::new();
     let mut dist = vec![vec![vec![usize::MAX; 4]; cols]; rows];
-    let mut predecessors: Predecessors =
-        vec![vec![vec![Vec::new(); 4]; cols]; rows];
+    let mut predecessors: Predecessors = vec![vec![vec![Vec::new(); 4]; cols]; rows];
 
     dist[start.0][start.1][1] = 0;
     heap.push(Reverse((0, start.0, start.1, 1)));
