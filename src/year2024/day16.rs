@@ -4,6 +4,8 @@ use std::{cmp::Reverse, collections::BinaryHeap};
 
 const DIRECTIONS: &[(isize, isize)] = &[(-1, 0), (0, 1), (1, 0), (0, -1)];
 
+type Predecessors = Vec<Vec<Vec<Vec<(usize, usize, usize)>>>>;
+
 pub fn solution() -> (usize, usize) {
     let input = std::fs::read_to_string("./src/year2024/input/day16.txt")
         .unwrap_or_else(|_| examples::DAY16_1.to_string());
@@ -33,7 +35,7 @@ fn dijkstra(maze: &[Vec<char>], start: (usize, usize), end: (usize, usize)) -> (
     let (rows, cols) = (maze.len(), maze[0].len());
     let mut heap = BinaryHeap::new();
     let mut dist = vec![vec![vec![usize::MAX; 4]; cols]; rows];
-    let mut predecessors: Vec<Vec<Vec<Vec<(usize, usize, usize)>>>> =
+    let mut predecessors: Predecessors =
         vec![vec![vec![Vec::new(); 4]; cols]; rows];
 
     dist[start.0][start.1][1] = 0;
