@@ -31,16 +31,16 @@ fn unique_ingredients(ranges: &[(usize, usize)]) -> usize {
     let mut current_end = sorted_ranges[0].1;
 
     for &(start, end) in &sorted_ranges[1..] {
-        if start <= current_end + 1 {
+        if start <= current_end {
             current_end = current_end.max(end);
         } else {
-            total += current_end - current_start + 1;
+            total += current_end - current_start;
             current_start = start;
             current_end = end;
         }
     }
 
-    total += current_end - current_start + 1;
+    total += current_end - current_start;
     total
 }
 
