@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 pub(crate) const DAY1: &str = r#"L68
 L30
 R48
@@ -28,3 +30,15 @@ pub(crate) const DAY4: &str = r#"..@@.@@@@.
 @.@@@.@@@@
 .@@@@@@@@.
 @.@.@@@.@."#;
+
+pub(crate) const DAY5: &str = r#"3-5
+10-14
+16-20
+12-18
+
+1
+5
+8
+11
+17
+32"#;

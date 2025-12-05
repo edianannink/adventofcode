@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 pub(crate) const DAY1: &str = r#"3   4
 4   3
 2   5
