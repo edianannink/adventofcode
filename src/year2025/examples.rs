@@ -42,3 +42,9 @@ pub(crate) const DAY5: &str = r#"3-5
 11
 17
 32"#;
+
+pub(crate) const DAY6: &str = r#"123 328  51 64 
+ 45 64  387 23 
+  6 98  215 314
+*   +   *   +  
+"#;
