@@ -41,18 +41,18 @@ fn part1(input: &str) -> usize {
 fn part2(input: &str) -> usize {
     let mut result = 0;
 
-    let char_rows: Vec<Vec<char>> = input.lines().map(|line| line.chars().collect()).collect();
+    let rows: Vec<Vec<char>> = input.lines().map(|line| line.chars().collect()).collect();
 
-    let mut char_columns: Vec<Vec<char>> = vec![Vec::new(); char_rows[0].len()];
-    for char_row in char_rows {
-        for (i, &item) in char_row.iter().enumerate() {
-            char_columns[char_row.len() - 1 - i].push(item);
+    let mut columns: Vec<Vec<char>> = vec![Vec::new(); rows[0].len()];
+    for row in rows {
+        for (i, &item) in row.iter().enumerate() {
+            columns[row.len() - 1 - i].push(item);
         }
     }
 
-    for vecs in char_columns.split(|chars| chars.iter().all(|c| c.is_whitespace())) {
-        let operator = vecs.last().unwrap().last().unwrap();
-        let numbers: Vec<usize> = vecs
+    for column in columns.split(|chars| chars.iter().all(|c| c.is_whitespace())) {
+        let operator = column.last().unwrap().last().unwrap();
+        let numbers: Vec<usize> = column
             .iter()
             .filter_map(|chars| {
                 chars
