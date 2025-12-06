@@ -42,6 +42,7 @@ fn part2(input: &str) -> usize {
     let mut result = 0;
 
     let char_rows: Vec<Vec<char>> = input.lines().map(|line| line.chars().collect()).collect();
+
     let mut char_columns: Vec<Vec<char>> = vec![Vec::new(); char_rows[0].len()];
     for char_row in char_rows {
         for (i, &item) in char_row.iter().enumerate() {
