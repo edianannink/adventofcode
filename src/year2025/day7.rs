@@ -26,21 +26,17 @@ fn bfs(map: &[Vec<char>], start: (usize, usize)) -> usize {
     visited.insert(start);
 
     while let Some((cr, cc)) = queue.pop_front() {
-        let (nr, nc) = (cr + 1, cc);
+        let nr = cr + 1;
         if nr < rows {
-            if map[nr][nc] == '^' {
+            if map[nr][cc] == '^' {
                 splits += 1;
-                let directions = &[(nr, cc - 1), (nr, cc + 1)];
-                for &dir in directions {
+                for &dir in [(nr, cc - 1), (nr, cc + 1)].iter() {
                     if visited.insert(dir) {
                         queue.push_back(dir);
                     }
                 }
-            } else {
-                let next = (nr, cc);
-                if visited.insert(next) {
-                    queue.push_back(next);
-                }
+            } else if visited.insert((nr, cc)) {
+                queue.push_back((nr, cc));
             }
         }
     }
@@ -50,8 +46,7 @@ fn bfs(map: &[Vec<char>], start: (usize, usize)) -> usize {
 
 // DFS results in exponential time complexity, so we use DP instead
 fn dp(map: &[Vec<char>], start: (usize, usize)) -> usize {
-    let rows = map.len();
-    let cols = map[0].len();
+    let (rows, cols) = (map.len(), map[0].len());
 
     let mut paths = vec![vec![0usize; cols]; rows];
     paths[start.0][start.1] = 1;
