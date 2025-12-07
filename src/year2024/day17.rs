@@ -5,7 +5,7 @@ pub fn solution() -> (String, String) {
         .unwrap_or_else(|_| examples::DAY17.to_string());
 
     let (registers, program) = parse_input(&input);
-    (alu(&registers, &program), dfs(&program).unwrap())
+    (cpu(&registers, &program), dfs(&program).unwrap())
 }
 
 fn dfs(program: &[usize]) -> Option<String> {
@@ -22,7 +22,7 @@ fn dfs(program: &[usize]) -> Option<String> {
             let test_a = (a << 3) | candidate;
 
             let registers = [test_a, 0, 0];
-            let output_str = alu(&registers, program);
+            let output_str = cpu(&registers, program);
 
             let output: Vec<usize> = output_str
                 .split(',')
@@ -44,7 +44,8 @@ fn dfs(program: &[usize]) -> Option<String> {
 
     None
 }
-fn alu(registers: &[usize], program: &[usize]) -> String {
+
+fn cpu(registers: &[usize], program: &[usize]) -> String {
     let mut pc = 0;
     let mut output: Vec<usize> = Vec::new();
     let mut registers = registers.to_owned();
