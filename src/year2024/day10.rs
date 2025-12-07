@@ -3,7 +3,7 @@ use std::collections::HashSet;
 
 const DIRECTIONS: &[(isize, isize)] = &[(1, 0), (0, 1), (-1, 0), (0, -1)];
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/input/day10.txt")
         .unwrap_or_else(|_| examples::DAY10.to_string());
 
@@ -20,7 +20,7 @@ pub fn solution() -> (usize, usize) {
     trails(matrix)
 }
 
-fn trails(input: Vec<Vec<usize>>) -> (usize, usize) {
+fn trails(input: Vec<Vec<usize>>) -> (String, String) {
     let (rows, cols) = (input.len(), input[0].len());
 
     let (mut sum_part1, mut sum_part2) = (0, 0);
@@ -32,7 +32,7 @@ fn trails(input: Vec<Vec<usize>>) -> (usize, usize) {
             }
         }
     }
-    (sum_part1, sum_part2)
+    (sum_part1.to_string(), sum_part2.to_string())
 }
 
 fn explore_part1(start: (usize, usize), input: &[Vec<usize>]) -> HashSet<(usize, usize)> {

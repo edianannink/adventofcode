@@ -1,12 +1,15 @@
 use crate::year2024::examples;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2024/input/day1.txt")
         .unwrap_or_else(|_| examples::DAY1.to_string());
 
     let values = process_input(input);
 
-    (sum_of_difference(&values), sum_of_similarity(&values))
+    (
+        sum_of_difference(&values).to_string(),
+        sum_of_similarity(&values).to_string(),
+    )
 }
 
 fn process_input(input: String) -> [Vec<usize>; 2] {

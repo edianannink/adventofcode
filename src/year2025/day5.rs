@@ -1,6 +1,6 @@
 use crate::year2025::examples;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2025/input/day5.txt")
         .unwrap_or_else(|_| examples::DAY5.to_string());
 
@@ -8,7 +8,7 @@ pub fn solution() -> (usize, usize) {
     solve(&ranges, &ingredients)
 }
 
-fn solve(ranges: &[(usize, usize)], ingredients: &[usize]) -> (usize, usize) {
+fn solve(ranges: &[(usize, usize)], ingredients: &[usize]) -> (String, String) {
     (
         ingredients
             .iter()
@@ -17,8 +17,9 @@ fn solve(ranges: &[(usize, usize)], ingredients: &[usize]) -> (usize, usize) {
                     .iter()
                     .any(|&(start, end)| ingredient >= start && ingredient <= end)
             })
-            .count(),
-        unique_ingredients(ranges),
+            .count()
+            .to_string(),
+        unique_ingredients(ranges).to_string(),
     )
 }
 

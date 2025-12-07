@@ -2,15 +2,15 @@ use std::collections::HashSet;
 
 use crate::year2024::examples;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/input/day15.txt")
         .unwrap_or_else(|_| examples::DAY15.to_string());
 
     let (start_pos, map, moves) = parse_input(&input);
 
     (
-        part1(start_pos, map.clone(), &moves),
-        part2(start_pos, map, &moves),
+        part1(start_pos, map.clone(), &moves).to_string(),
+        part2(start_pos, map, &moves).to_string(),
     )
 }
 

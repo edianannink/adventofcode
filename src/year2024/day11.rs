@@ -1,11 +1,14 @@
 use crate::year2024::examples;
 use std::collections::HashMap;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/input/day11.txt")
         .unwrap_or_else(|_| examples::DAY11.to_string());
 
-    (blink_part1(&input), blink_part2(&input))
+    (
+        blink_part1(&input).to_string(),
+        blink_part2(&input).to_string(),
+    )
 }
 
 fn blink_part1(input: &str) -> usize {

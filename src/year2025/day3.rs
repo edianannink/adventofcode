@@ -1,13 +1,13 @@
 use crate::year2025::examples;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2025/input/day3.txt")
         .unwrap_or_else(|_| examples::DAY3.to_string());
 
     (part1(&input), part2(&input))
 }
 
-fn part1(input: &str) -> usize {
+fn part1(input: &str) -> String {
     let mut result = 0;
 
     for line in input.lines() {
@@ -26,10 +26,10 @@ fn part1(input: &str) -> usize {
         result += max;
     }
 
-    result
+    result.to_string()
 }
 
-fn part2(input: &str) -> usize {
+fn part2(input: &str) -> String {
     let mut result = 0;
 
     for line in input.lines() {
@@ -57,5 +57,5 @@ fn part2(input: &str) -> usize {
         result += selected.iter().fold(0, |acc, &d| acc * 10 + d);
     }
 
-    result
+    result.to_string()
 }

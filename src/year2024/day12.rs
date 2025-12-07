@@ -15,7 +15,7 @@ impl Group {
     }
 }
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/input/day12.txt")
         .unwrap_or_else(|_| examples::DAY12.to_string());
 
@@ -24,7 +24,7 @@ pub fn solution() -> (usize, usize) {
     let (part1, groups) = price_part1(&map);
     let part2 = price_part2(groups);
 
-    (part1, part2)
+    (part1.to_string(), part2.to_string())
 }
 
 fn price_part1(map: &[Vec<char>]) -> (usize, Vec<Group>) {

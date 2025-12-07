@@ -1,13 +1,13 @@
 use crate::year2025::examples;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2025/input/day2.txt")
         .unwrap_or_else(|_| examples::DAY2.to_string());
 
     solve(&input)
 }
 
-fn solve(input: &str) -> (usize, usize) {
+fn solve(input: &str) -> (String, String) {
     let ranges: Vec<Vec<&str>> = input
         .split(',')
         .map(|range| range.split('-').collect())
@@ -49,5 +49,5 @@ fn solve(input: &str) -> (usize, usize) {
             }
         }
     }
-    (part1, part2)
+    (part1.to_string(), part2.to_string())
 }

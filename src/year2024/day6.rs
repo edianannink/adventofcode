@@ -5,13 +5,13 @@ use std::collections::HashSet;
 const OBSTACLE: char = '#';
 const GUARD: &str = "<>^v";
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2024/input/day6.txt")
         .unwrap_or_else(|_| examples::DAY6.to_string());
 
     let mut matrix = construct_matrix(input.to_string());
 
-    (part1(&matrix), part2(&mut matrix))
+    (part1(&matrix).to_string(), part2(&mut matrix).to_string())
 }
 
 #[derive(Clone, Debug, Eq, Hash, PartialEq)]

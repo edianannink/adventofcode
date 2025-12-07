@@ -1,12 +1,12 @@
 use crate::year2024::examples;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2024/input/day2.txt")
         .unwrap_or_else(|_| examples::DAY2.to_string());
 
     (
-        count_safe_reports(&input, monotonic_series),
-        count_safe_reports(&input, monotonic_series_dampener),
+        count_safe_reports(&input, monotonic_series).to_string(),
+        count_safe_reports(&input, monotonic_series_dampener).to_string(),
     )
 }
 

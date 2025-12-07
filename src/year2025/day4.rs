@@ -11,11 +11,11 @@ const DIRECTIONS: &[(isize, isize)] = &[
     (1, -1),
 ];
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2025/input/day4.txt")
         .unwrap_or_else(|_| examples::DAY4.to_string());
 
-    (part1(&input), part2(&input))
+    (part1(&input).to_string(), part2(&input).to_string())
 }
 
 fn part1(input: &str) -> usize {

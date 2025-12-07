@@ -4,11 +4,11 @@ use std::ops::Mul;
 
 const REGEX: &str = r#"(mul\((\d+),(\d+)\))"#;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2024/input/day3.txt")
         .unwrap_or_else(|_| examples::DAY3.to_string());
 
-    (mul_sum(&input), do_mul(&input))
+    (mul_sum(&input).to_string(), do_mul(&input).to_string())
 }
 
 fn mul_sum(input_str: &str) -> usize {

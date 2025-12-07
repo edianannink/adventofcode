@@ -6,10 +6,10 @@ fn print_header(year: &str) {
     println!("===============================");
 }
 
-fn print_day_solution(day: usize, part: (usize, usize)) {
+fn print_day_solution(day: usize, part: (String, String)) {
     println!("Day {}:", day);
-    println!("  Part 1: {:?}", part.0);
-    println!("  Part 2: {:?}", part.1);
+    println!("  Part 1: {}", part.0);
+    println!("  Part 2: {}", part.1);
     println!("-------------------------------");
 }
 
@@ -40,4 +40,5 @@ fn main() {
     print_day_solution(14, year2024::day14::solution());
     print_day_solution(15, year2024::day15::solution());
     print_day_solution(16, year2024::day16::solution());
+    print_day_solution(17, year2024::day17::solution());
 }

@@ -1,11 +1,14 @@
 use crate::year2024::examples;
 use std::collections::{HashMap, HashSet};
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/input/day8.txt")
         .unwrap_or_else(|_| examples::DAY8.to_string());
 
-    (antinodes_part1(&input), antinodes_part2(&input))
+    (
+        antinodes_part1(&input).to_string(),
+        antinodes_part2(&input).to_string(),
+    )
 }
 
 fn antinodes_part1(input: &str) -> usize {

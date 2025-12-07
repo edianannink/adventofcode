@@ -1,14 +1,14 @@
 use crate::year2024::examples;
 use std::collections::{HashMap, HashSet};
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2024/input/day5.txt")
         .unwrap_or_else(|_| examples::DAY5.to_string());
 
     compute_pages(input)
 }
 
-fn compute_pages(input: String) -> (usize, usize) {
+fn compute_pages(input: String) -> (String, String) {
     let (rules, pages) = input.split_once("\n\n").unwrap();
     let mut orderings = HashMap::<usize, HashSet<usize>>::new();
 
@@ -38,7 +38,7 @@ fn compute_pages(input: String) -> (usize, usize) {
             p2 += p[p.len() / 2];
         }
     }
-    (p1, p2)
+    (p1.to_string(), p2.to_string())
 }
 
 #[cfg(test)]
@@ -48,6 +48,9 @@ mod tests {
     #[test]
     fn test_day5() {
         let (part1, part2) = (143, 123);
-        assert_eq!(compute_pages(examples::DAY5.to_string()), (part1, part2));
+        assert_eq!(
+            compute_pages(examples::DAY5.to_string()),
+            (part1.to_string(), part2.to_string())
+        );
     }
 }

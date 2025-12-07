@@ -1,10 +1,10 @@
 use crate::year2025::examples;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2025/input/day6.txt")
         .unwrap_or_else(|_| examples::DAY6.to_string());
 
-    (part1(&input), part2(&input))
+    (part1(&input).to_string(), part2(&input).to_string())
 }
 
 fn part1(input: &str) -> usize {

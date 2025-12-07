@@ -3,13 +3,16 @@ use std::collections::HashMap;
 
 const SEARCH_PATTERN: &str = "XMAS";
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2024/input/day4.txt")
         .unwrap_or_else(|_| examples::DAY4.to_string());
 
     let mut matrix = construct_matrix(input);
 
-    (total_matches(&mut matrix), cross_mas_matches(&matrix))
+    (
+        total_matches(&mut matrix).to_string(),
+        cross_mas_matches(&matrix).to_string(),
+    )
 }
 
 pub(crate) fn construct_matrix(input: String) -> Vec<Vec<char>> {

@@ -1,6 +1,6 @@
 use crate::year2024::examples;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/input/day7.txt")
         .unwrap_or_else(|_| examples::DAY7.to_string());
 
@@ -21,7 +21,7 @@ pub fn solution() -> (usize, usize) {
         }
     }
 
-    (day1, day2)
+    (day1.to_string(), day2.to_string())
 }
 
 fn dfs(problem: &[&str], concat_enable: bool) -> bool {

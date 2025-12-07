@@ -2,14 +2,14 @@ use crate::year2025::examples;
 
 const CLICKS: isize = 100;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2025/input/day1.txt")
         .unwrap_or_else(|_| examples::DAY1.to_string());
 
     solve(&input)
 }
 
-fn solve(input: &str) -> (usize, usize) {
+fn solve(input: &str) -> (String, String) {
     let mut dial: isize = CLICKS / 2;
     let mut total_zeros = 0;
     let mut on_zero = 0;
@@ -50,5 +50,5 @@ fn solve(input: &str) -> (usize, usize) {
         }
     }
 
-    (on_zero, on_zero + total_zeros)
+    (on_zero.to_string(), (on_zero + total_zeros).to_string())
 }

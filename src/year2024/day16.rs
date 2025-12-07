@@ -6,14 +6,14 @@ const DIRECTIONS: &[(isize, isize)] = &[(-1, 0), (0, 1), (1, 0), (0, -1)];
 
 type Predecessors = Vec<Vec<Vec<Vec<(usize, usize, usize)>>>>;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2024/input/day16.txt")
         .unwrap_or_else(|_| examples::DAY16_1.to_string());
 
     solve(&input)
 }
 
-pub fn solve(input: &str) -> (usize, usize) {
+pub fn solve(input: &str) -> (String, String) {
     let maze: Vec<Vec<char>> = input.lines().map(|l| l.chars().collect()).collect();
     let mut start = (0, 0);
     let mut end = (0, 0);
@@ -31,7 +31,7 @@ pub fn solve(input: &str) -> (usize, usize) {
     dijkstra(&maze, start, end)
 }
 
-fn dijkstra(maze: &[Vec<char>], start: (usize, usize), end: (usize, usize)) -> (usize, usize) {
+fn dijkstra(maze: &[Vec<char>], start: (usize, usize), end: (usize, usize)) -> (String, String) {
     let (rows, cols) = (maze.len(), maze[0].len());
     let mut heap = BinaryHeap::new();
     let mut dist = vec![vec![vec![usize::MAX; 4]; cols]; rows];
@@ -101,5 +101,5 @@ fn dijkstra(maze: &[Vec<char>], start: (usize, usize), end: (usize, usize)) -> (
         }
     }
 
-    (min_cost, tiles.len())
+    (min_cost.to_string(), tiles.len().to_string())
 }

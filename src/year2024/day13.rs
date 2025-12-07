@@ -1,13 +1,16 @@
 use crate::year2024::examples;
 use regex::Regex;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/input/day13.txt")
         .unwrap_or_else(|_| examples::DAY13.to_string());
 
     let parsed_input = parse_input(&input);
 
-    (part1(&parsed_input), part2(&parsed_input))
+    (
+        part1(&parsed_input).to_string(),
+        part2(&parsed_input).to_string(),
+    )
 }
 
 fn part1(parsed_input: &[isize]) -> usize {

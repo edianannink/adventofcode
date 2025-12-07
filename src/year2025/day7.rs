@@ -2,7 +2,7 @@ use std::collections::{HashSet, VecDeque};
 
 use crate::year2025::examples;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/year2025/input/day7.txt")
         .unwrap_or_else(|_| examples::DAY7.to_string());
 
@@ -13,7 +13,7 @@ pub fn solution() -> (usize, usize) {
         .find_map(|(r, row)| row.iter().position(|&cell| cell == 'S').map(|c| (r, c)))
         .unwrap();
 
-    (bfs(&map, start), dp(&map, start))
+    (bfs(&map, start).to_string(), dp(&map, start).to_string())
 }
 
 fn bfs(map: &[Vec<char>], start: (usize, usize)) -> usize {

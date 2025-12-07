@@ -23,7 +23,7 @@ impl Robot {
     }
 }
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/input/day14.txt")
         .unwrap_or_else(|_| examples::DAY14.to_string());
 
@@ -34,7 +34,7 @@ pub fn solution() -> (usize, usize) {
     } else {
         part2(&robots)
     };
-    (part1(&robots), part2)
+    (part1(&robots).to_string(), part2.to_string())
 }
 
 fn part1(robots: &Vec<Robot>) -> usize {

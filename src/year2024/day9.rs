@@ -1,11 +1,14 @@
 use crate::year2024::examples;
 
-pub fn solution() -> (usize, usize) {
+pub fn solution() -> (String, String) {
     let input = std::fs::read_to_string("./src/input/day9.txt")
         .unwrap_or_else(|_| examples::DAY9.to_string());
     let trimmed_input = input.trim();
 
-    (disk_map_part1(trimmed_input), disk_map_part2(trimmed_input))
+    (
+        disk_map_part1(trimmed_input).to_string(),
+        disk_map_part2(trimmed_input).to_string(),
+    )
 }
 
 fn disk_map_part2(input: &str) -> usize {
