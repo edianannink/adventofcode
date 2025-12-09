@@ -23,6 +23,7 @@ fn main() {
     print_day_solution(6, year2025::day6::solution());
     print_day_solution(7, year2025::day7::solution());
     print_day_solution(8, year2025::day8::solution());
+    print_day_solution(9, year2025::day9::solution());
 
     print_header("2024");
     print_day_solution(1, year2024::day1::solution());
