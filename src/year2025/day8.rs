@@ -62,5 +62,6 @@ fn part2(boxes: &[JunctionBox], edges: &[Edge], size: usize) -> usize {
             break;
         }
     }
+
     boxes[final_edge.u].x * boxes[final_edge.v].x
 }
