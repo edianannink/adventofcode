@@ -71,6 +71,7 @@ fn solve(machines: &[Machine]) -> (String, String) {
         let mut queue = VecDeque::new();
         let mut visited = HashSet::new();
         queue.push_back((0, 0));
+        visited.insert(0);
 
         while let Some((state, presses)) = queue.pop_front() {
             if state == machine.lights {
