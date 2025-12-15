@@ -46,4 +46,5 @@ fn main() {
     print_day_solution(15, year2024::day15::solution());
     print_day_solution(16, year2024::day16::solution());
     print_day_solution(17, year2024::day17::solution());
+    print_day_solution(18, year2024::day18::solution());
 }

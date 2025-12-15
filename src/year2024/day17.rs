@@ -1,7 +1,7 @@
 use crate::year2024::examples;
 
 pub fn solution() -> (String, String) {
-    let input = std::fs::read_to_string("./src/year2024/input/day18.txt")
+    let input = std::fs::read_to_string("./src/year2024/input/day17.txt")
         .unwrap_or_else(|_| examples::DAY17.to_string());
 
     let (registers, program) = parse_input(&input);
